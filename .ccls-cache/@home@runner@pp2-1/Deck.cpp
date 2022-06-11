@@ -1,17 +1,17 @@
 #include "Deck.hpp"
-
+//Check the size
 int Deck::size() const {
     return n;
 }
-
+//check the empty
 bool Deck::empty() const {
     return D.empty();
 }
-
+//check front
 const Elem& Deck::front() {
     return D.front();
 }
-
+//check the back
 const Elem& Deck::back() {
     return D.back();
 }
@@ -39,11 +39,3 @@ void Deck::removeBack() {
     D.removeBack(); 
     n--;
 }
-/*
-const StringElem Deck::front_has() const {
-	if (is_empty()) {
-		throw("front_has() failed.\n");
-	}
-	return (D.front());
-}
-*/

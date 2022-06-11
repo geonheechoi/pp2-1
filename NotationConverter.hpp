@@ -32,3 +32,25 @@ private:
 };
 
 #endif
+
+/*
+Author:Geonhee Choi && Hyunjung Lee: This code convert notation to use deque and doubly linked list
+Method in mentioned under 
+std::string postfixToInfix(std::string inStr)
+This method takes in a string of postfix notation and returns a string in the infix notation
+std::string postfixToPrefix(std::string inStr)
+This method takes in a string of postfix notation and returns a string in the prefix notation
+std::string infixToPostfix(std::string inStr)
+This method takes in a string of infix notation and returns a string in the postfix notation
+std::string infixToPrefix(std::string inStr)
+This method takes in a string of infix notation and returns a string in the prefix notation
+std::string prefixToInfix(std::string inStr)
+This method takes in a string of prefix notation and returns a string in the postfix notation
+std::string prefixToPostfix(std::string inStr)
+This method takes in a string of prefix notation and returns a string in the postfix notation 
+This file is hppfile for NotationConverter.cpp
+
+
+*/
+
+

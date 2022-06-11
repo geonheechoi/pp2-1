@@ -1,5 +1,30 @@
-#include "NotationConverter.hpp"
+/*
+Author:Geonhee Choi && Hyunjung Lee: This code convert notation to use deque and doubly linked list
+Method in mentioned under 
+std::string postfixToInfix(std::string inStr)
+This method takes in a string of postfix notation and returns a string in the infix notation
+std::string postfixToPrefix(std::string inStr)
+This method takes in a string of postfix notation and returns a string in the prefix notation
+std::string infixToPostfix(std::string inStr)
+This method takes in a string of infix notation and returns a string in the postfix notation
+std::string infixToPrefix(std::string inStr)
+This method takes in a string of infix notation and returns a string in the prefix notation
+std::string prefixToInfix(std::string inStr)
+This method takes in a string of prefix notation and returns a string in the postfix notation
+std::string prefixToPostfix(std::string inStr)
+This method takes in a string of prefix notation and returns a string in the postfix notation 
+This is cpp file for Assignment 2
 
+*/
+#include "NotationConverter.hpp"
+//#include "catch.hpp"
+#include "Deck.hpp"
+#include "Deck.cpp"
+#include "DL.hpp"
+#include "DL.cpp"
+//#include "NotationConverterInterface.hpp"
+
+//check the operator
 bool NotationConverter::isOperator(char ch) {
 
   
@@ -18,7 +43,7 @@ bool NotationConverter::isOperand(char ch) {
   else
     return 0;
 }
-
+//check the string is valid
 bool NotationConverter::isValid(std::string inStr) {
   int result = 0;
 
@@ -51,7 +76,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr) {
     if (!isValid(inStr)) {
         throw inStr;
       }
-        for (int i = 0; i<inStr.size(); i++) {
+        for (unsigned int i = 0; i<inStr.size(); i++) {
           if (inStr[i] != ' '){
          //   throw inStr;
            if (isOperator(inStr[i])){
@@ -70,7 +95,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr) {
 
   op.insertBack('(');
   int n=op2.size();
-  for (int i = 1; i < n - 1; i++) {
+  for ( int i = 1; i < n - 1; i++) {
     op.insertBack('(');
   }
   while (op1.empty() == false) {
@@ -150,7 +175,7 @@ std::string NotationConverter::infixToPrefix(std::string inStr) {
   if (inStr[0] != '(') {
     throw inStr;
   }
-  for (unsigned int i = 0; i < inStr.size(); i++) {
+  for (long unsigned int i = 0; i < inStr.size(); i++) {
     while (inStr[i] != ')' && inStr[i] != *inStr.end()) {
       if (inStr[i] != ' ') {
         if (isOperator(inStr[i])) {
