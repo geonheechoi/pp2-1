@@ -17,13 +17,13 @@ const Elem& Deck::back() {
 }
 
 // insert new first element
-void Deck::insertFront(const Elem& e) { 
+void Deck::insertFront(const char& e) { 
     D.addFront(e); 
     n++;
 }
 
 // insert new last element
-void Deck::insertBack(const Elem& e) { 
+void Deck::insertBack(const char& e) { 
     D.addBack(e); 
     n++;
 }

@@ -1,10 +1,14 @@
 #include "NotationConverter.hpp"
 
 bool NotationConverter::isOperator(char ch) {
+
+  
   if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
     return 1;
   else
     return 0;
+
+  
 }
 
 bool NotationConverter::isOperand(char ch) {
@@ -42,42 +46,44 @@ int NotationConverter::precedence(char ch) {
 
 // Convert postfix notation to infix notation
 std::string NotationConverter::postfixToInfix(std::string inStr) {
-  
-    if (isValid(inStr)) {
-        for (int i = 0; inStr[i] != '\0'; i++) {
-          if (inStr[i] == ' ')
-            throw inStr;
-          else if (isOperand(inStr[i]))
-            // push operand
-            op1.insertBack(inStr[i]);
-          else
-            // push operator
-            op2.insertBack(inStr[i]);
-        }
-    } else {
-    throw inStr;
-  }
 
-  if (op1.size() - 1 != op2.size()) {
+
+    if (!isValid(inStr)) {
+        throw inStr;
+      }
+        for (int i = 0; i<inStr.size(); i++) {
+          if (inStr[i] != ' '){
+         //   throw inStr;
+           if (isOperator(inStr[i])){
+            // push operand
+            op2.insertBack(inStr[i]);
+             }else{
+            // push operator
+            op1.insertBack(inStr[i]);
+        }
+    }
+ }
+
+  if (op2.size() != op1.size()-1) {
     throw inStr;
   }
 
   op.insertBack('(');
-
-  for (int i = 1; i < op2.size() - 1; i++) {
+  int n=op2.size();
+  for (int i = 1; i < n - 1; i++) {
     op.insertBack('(');
   }
-  while (op1.empty() == 0) {
+  while (op1.empty() == false) {
     op.insertBack(op1.front());
     op1.removeFront();
-
-    if (op2.empty() == 0) {
+    if (op2.empty() == false) {
       if (op2.size() == 2) {
         op.insertBack(')');
         op.insertBack(op2.back());
         op2.removeBack();
         op.insertBack('(');
-      } else {
+      } 
+      else {
         op.insertBack(op2.front());
         op2.removeFront();
       }
@@ -85,98 +91,21 @@ std::string NotationConverter::postfixToInfix(std::string inStr) {
   }
   op.insertBack(')');
 
-  for (int i = 1; i < op2.size()-1; i++) {
+  for (int i = 1; i < n-1; i++) {
     op.insertBack(')');
   }
 
   return toString();
-}
 
-// Convert postfix notation to prefix notation
-std::string NotationConverter::postfixToPrefix(std::string inStr) {
-  return infixToPrefix(postfixToInfix(inStr));
-}
 
+
+
+  
+}
 // Convert infix notation to postfix notation
 std::string NotationConverter::infixToPostfix(std::string inStr) {
 
-  /*
-  if (!isOperator(inStr[0])) {
-    throw std::runtime_error("not a valid operation");
-  }
-
-  while (deckOperands.size() != 0) {
-    deckOperands.removeFront();
-  }
-
-  int n = inStr.size();
-  //  std::string  letter;
-  std::string convertedString;
-
-  for (int i = 0; i < n; i++) {
-    inStr = "";
-
-    inStr.push_back(inStr[i]);
-
-    if (isOperand(inStr[i])) {
-      convertedString += inStr[i];
-    } else if (inStr[i] == '(') {
-      deckOperands.insertFront(inStr[i]);
-    } else if (inStr[i] == ')') {
-      // while(deckOperands.front() != "(" && !(deckOperands.empty()) ) {
-      convertedString += deckOperands.front();
-      deckOperands.removeBack();
-    }
-    // remove the head
-    if (inStr.front() == '(') {
-      deckOperands.removeFront();
-    }
-
-    // if the letter is an operator
-    if (isOperator(inStr[i])) {
-      if (deckOperands.empty()) {
-        deckOperands.insertFront(inStr[i]);
-      } else {
-        char tempChar;
-        char x = deckOperands.front();
-        tempChar = x;
-
-        if (precedence(inStr[i]) > precedence(tempChar)) {
-          deckOperands.insertFront(inStr[i]);
-        } else if ((precedence(inStr[i]) == precedence(tempChar)) &&
-                   inStr[i] == '^') {
-          deckOperands.insertFront(inStr[i]);
-        } else {
-          while ((!deckOperands.empty()) &&
-                 (precedence(inStr[i]) <= precedence(tempChar))) {
-            convertedString += deckOperands.front();
-            deckOperands.removeBack();
-          }
-          std::string y = "";
-          y.push_back(inStr[i]);
-          deckOperands.insertFront(inStr[i]);
-        }
-      }
-    }
-  }
-
-  while (!deckOperands.empty()) {
-    convertedString += deckOperands.front();
-    deckOperands.removeFront();
-  }
-
-  std::string spacedString = "";
-
-  int z = convertedString.size();
-  for (int i = 0; i < z; i++) {
-    spacedString += convertedString[i];
-    if (i < z - 1) {
-      spacedString += " ";
-    }
-  }
-
-  return spacedString;
- */
+  
    if (inStr[0] != '(') {
         throw inStr;
     }
@@ -207,7 +136,14 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
         }
     }
     return toString();
+
 }
+// Convert postfix notation to prefix notation
+std::string NotationConverter::postfixToPrefix(std::string inStr) {
+  return infixToPrefix(postfixToInfix(inStr));
+}
+
+
 
 // Convert infix notation to prefix notation
 std::string NotationConverter::infixToPrefix(std::string inStr) {
@@ -246,7 +182,7 @@ std::string NotationConverter::prefixToInfix(std::string inStr) {
     bool valid = false;
     int counter = 0;
     
-    for (int i = 0; i < inStr.size(); i++) {
+    for (unsigned int i = 0; i < inStr.size(); i++) {
         if (inStr[i] != ' ') {
             if(isOperator(inStr[i]))
             {

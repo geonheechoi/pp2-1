@@ -44,17 +44,7 @@ void DLinkedList::removeFront(){
 void DLinkedList::removeBack(){
     remove(trailer->prev);
 }
-/*
-// insert new node before v
-void DLinkedList::add(DNode* v, const Elem& e) {
-    DNode* u = new DNode;
-    u->elem = e; //create new node for e
-    u->next = v; // link u in between v
-    u->prev = v->prev; // ...and v->prev
-    v->prev->next = u;
-    v->prev -> u;
-}
-*/
+
  // add to back of list
  void DLinkedList::remove(DNode* v) { // remove node v
    DNode* u = v->prev; // predecessor

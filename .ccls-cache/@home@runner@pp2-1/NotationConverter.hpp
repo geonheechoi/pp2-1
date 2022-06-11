@@ -24,13 +24,10 @@ public:
     int precedence(char ch); 
 private:
     Deck op;
-    Deck op1; // Operand
+   Deck op1; // Operand
     Deck op2; // Operator
     Deck deckOperands;
     Deck Operators;
-  //  DLinkedList temp;
-  //  DLinkedList temp1;
- //   DLinkedList temp2;
 
 };
 
